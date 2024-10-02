@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Home</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+   <header>
+       <div class="logo" id="logo"><img src="logo.png" alt="Spective Logo"></div>
+   <nav>
+       <ul>
+           <li><a href="index.html" alt="default" id="navhome">Home</a></li>
+           <li><a href="about.html">About</a></li>
+           <li><a href="cataracts.html">Cataracts</a></li>
+       </ul>
+   </nav>
+   </header>
+
+   <main class="homemain">
+       <h1>Spective Visual Impairment Simulator: Cataracts</h1>
+       <p>This is the Home Page of the Spective Interface. Here users will be able to use the slider to simulate the effects of cataracts on the live webcam feed.</p>
+       <video id="webcam" autoplay playsinline></video>
+       <div class="slidermain">
+           <input type="range" min="1" max="5" value="1" class="slider" id="sliderrange">
+               <div class="labels">
+                   <span class="label" style="left: 0%;">Level 1</span>
+                   <span class="label" style="left: 20%;">Level 2</span>
+                   <span class="label" style="left: 40%;">Level 3</span>
+                   <span class="label" style="left: 50%;">Level 4</span>
+                   <span class="label" style="left: 80%;">Leval 5</span>
+               </div>
+           <label for="sliderrange" id="sliderLabel">Regular</label>
+       </div>
+   </div>
+   </main>
+
+   <footer>
+       <p>© 2024 Spective. All rights reserved</p>
+   </footer>
+
+
+   <script>
+
+   const slider = document.getElementById('sliderrange');
+   const label = document.getElementById('sliderLabel');
+
+       const webcamElement = document.getElementById('webcam');
+       navigator.mediaDevices.getUserMedia({ video: true })
+   .then((stream) => {
+       webcamElement.srcObject = stream;
+   })
+   .catch((error) => {
+       console.error('Error accessing the webcam: ', error);
+   });
+
+   function updateLabel() {
+       switch (slider.value) {
+           case '1':
+               label.textContent = 'Regular Vision';
+               break;
+           case '2':
+               label.textContent = 'Early Cataracts';
+               break;
+           case '3':
+               label.textContent = 'Immature cataracts';
+               break;
+           case '4':
+               label.textContent = 'Mature cataracts';
+               break;
+           case '5':
+               label.textContent = 'Advanced cataracts';
+               break;        
+       }
+   }
+
+   updateLabel();
+
+   slider.addEventListener('input', updateLabel);
+
+   </script>
+
+</body>
+</html>
